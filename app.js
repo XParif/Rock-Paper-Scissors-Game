@@ -2,11 +2,13 @@ let userScore = 0;
 let computerScore = 0;
 const userScore_span = document.getElementById('user-score');
 const computerScore_span = document.getElementById('computer-score');
-const scoreBoard_div = document.querySelector('.score-board');
 const result_div = document.querySelector('.result > p');
 const rock_div = document.getElementById('Rock');
 const paper_div = document.getElementById('Paper');
 const scissors_div = document.getElementById('Scissors');
+const succes = new Audio('sounds/success.wav');
+const failed = new Audio('sounds/failed.wav');
+const again = new Audio('sounds/again.wav');
 
 const getComputerChoice = () => {
     const choices = ['Rock', 'Paper', 'Scissors'];
@@ -19,6 +21,7 @@ const win = (user, computer) => {
     userScore_span.innerText = ++userScore;
     result_div.innerText = user + ' beats ' + computer + ". You WIN !!!";
     userChoice_div.classList.add('green-glow');
+    succes.play();
     setTimeout(() => {
         userChoice_div.classList.remove('green-glow');
     },1000);
@@ -31,6 +34,7 @@ const lose = (user, computer) => {
     computerScore_span.innerText = ++computerScore;
     result_div.innerText = computer + ' beats ' + user + ". You LOSE !!!";
     userChoice_div.classList.add('red-glow');
+    failed.play();
     setTimeout(() => {
         userChoice_div.classList.remove('red-glow');
     },1000);
@@ -40,6 +44,7 @@ const draw = (user, computer) => {
     const userChoice_div = document.getElementById(user);
     result_div.innerText = computer + ' and ' + user + " are same. DRAW !!!";
     userChoice_div.classList.add('grey-glow');
+    again.play();
     setTimeout(() => {
         userChoice_div.classList.remove('grey-glow');
     },1000);
